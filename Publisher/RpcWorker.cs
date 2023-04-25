@@ -11,11 +11,10 @@ namespace Publisher
 {
     internal class RpcWorker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
-        //IRequestClient<Common.Request> _client;
+        private readonly ILogger<RpcWorker> _logger;
         private readonly IClientFactory _clientFactory;
 
-        public RpcWorker(ILogger<Worker> logger, IClientFactory clientFactory)
+        public RpcWorker(ILogger<RpcWorker> logger, IClientFactory clientFactory)
         {
             _logger = logger;
             _clientFactory = clientFactory;
@@ -24,7 +23,7 @@ namespace Publisher
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             int i = 0;
-            var client = _clientFactory.CreateRequestClient<MyRequest>();
+            var client = _clientFactory.CreateRequestClient<MyRequest>(new Uri("exchange:request-topic"));
 
             while (!stoppingToken.IsCancellationRequested)
             {

@@ -6,7 +6,6 @@ using Publisher;
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        //services.AddHostedService<Worker>();
         services.AddHostedService<RpcWorker>();
         services.AddMassTransit(x =>
         {
@@ -14,9 +13,6 @@ IHost host = Host.CreateDefaultBuilder(args)
 
             x.AddRider(rider =>
             {
-                rider.AddProducer<Null, Message>("test-topic", (riderContext, producerConfig) =>
-                {
-                });
                 rider.AddProducer<Null, MyRequest>("request-topic", (riderContext, producerConfig) =>
                 {
                 });
@@ -25,8 +21,6 @@ IHost host = Host.CreateDefaultBuilder(args)
                     k.Host("localhost:29092");
                 });
             });
-            x.AddRequestClient<MyRequest>(new Uri("topic:request-topic"));
-
         });
     })
     .Build();
