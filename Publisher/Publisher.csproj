@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Publisher-c0e28c9e-b761-4314-930d-bb24cd8d7f65</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+	 <PackageReference Include="MassTransit" Version="8.0.14" />
+	 <PackageReference Include="MassTransit.Abstractions" Version="8.0.14" />
+	 <PackageReference Include="MassTransit.Kafka" Version="8.0.14" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+</Project>
