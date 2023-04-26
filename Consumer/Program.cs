@@ -26,8 +26,8 @@ IHost host = Host.CreateDefaultBuilder(args)
                         e.ConfigureConsumer<SettingsMessageConsumer>(context);
                         e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(3)));
                         e.EnableAutoOffsetStore = false;
-                        e.CheckpointInterval = TimeSpan.FromSeconds(10000);
-                        e.MessageLimit = 10000;
+                        e.CheckpointInterval = TimeSpan.MaxValue;
+                        e.MessageLimit = ushort.MaxValue;
                     });
                 });
             });
