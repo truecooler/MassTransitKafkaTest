@@ -18,11 +18,11 @@ namespace Publisher
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             using var scope = _serviceScopeFactory.CreateScope();
-            var producer = scope.ServiceProvider.GetService<ITopicProducer<Null, Message>>();
-            int i = 0;
+            var producer = scope.ServiceProvider.GetService<ITopicProducer<Null, SettingsMessage>>();
+            int i = 666;
             while (!stoppingToken.IsCancellationRequested)
             {
-                await producer.Produce(null, new() { Value = i.ToString() });
+                await producer.Produce(null, new("host " + i, "host " + i+1, i + 2));
                 _logger.LogInformation(i + " published");
 
                 await Task.Delay(4000, stoppingToken);
